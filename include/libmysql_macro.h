@@ -161,6 +161,15 @@ const uint32_t DB_TABLE_NAME_MAX_LEN = DB_NAME_MAX_LEN + TABLE_NAME_MAX_LEN;
 			int _fi;\
 			_fi = -1;
 
+#define PB_STD_QUERY_WHILE_BEGIN_NO_ADD( sqlstr)  \
+{ \
+	MYSQL_RES *res;\
+	MYSQL_ROW  row;\
+	if (0 == (this->db->exec_query_sql(sqlstr, &res))){\
+	while((row = mysql_fetch_row(res))){\
+	int _fi;\
+	_fi = -1;
+
 #define PB_STD_QUERY_WHILE_END()  \
 		}\
 		mysql_free_result(res);	\
